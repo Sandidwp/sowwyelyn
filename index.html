@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Sandyy</title>
+    <style>
+        /* Mengubah font dan background menjadi tema pastel/merah muda */
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Font ala mesin tik klasik seperti di video */
+            background-color: #ffe4e1; /* Warna merah muda pastel (MistyRose) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Mencegah scrollbar saat tombol No bergerak */
+        }
+
+        /* Styling untuk kotak utama (Card) */
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.5); /* Shadow berwarna pink lembut */
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 2px solid #ffb6c1; /* Border pink */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Styling untuk gambar kucing */
+        .cat-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #d16b8a; /* Warna teks pink tua */
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        /* Container untuk tombol agar posisinya rapi */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px; /* Menjaga tinggi agar layout tidak rusak saat tombol No keluar dari alur */
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 16px;
+            font-family: inherit;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        /* Tombol Yes */
+        #yes-btn {
+            background-color: #ffb6c1; /* Pink muda */
+            color: white;
+            box-shadow: 0 4px 6px rgba(255, 182, 193, 0.6);
+        }
+
+        #yes-btn:hover {
+            background-color: #ff9aaa;
+            transform: scale(1.05);
+        }
+
+        /* Tombol No (akan bergerak) */
+        #no-btn {
+            background-color: #f0f0f0;
+            color: #555;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Menyembunyikan elemen */
+        .hidden {
+            display: none;
+        }
+
+        /* Teks panjang untuk halaman sukses */
+        .success-text {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-top: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Tombol tambahan di halaman sukses */
+        .action-btn {
+            background-color: #ffb6c1;
+            color: white;
+            margin: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-page" class="card">
+        <img src="bubududu1.jpg" alt="Sad Cat" class="cat-img">
+        
+        <h1>Will you forgive me, elynn?</h1>
+        
+        <div class="button-container">
+            <button id="yes-btn">Yes</button>
+            <button id="no-btn">No</button>
+        </div>
+    </div>
+
+    <div id="success-page" class="card hidden">
+        <img src="bubududu2.jpg" alt="Happy Cat" class="cat-img">
+        
+        <h1>I knew you would forgive me! 💖</h1>
+        
+        <div class="success-text">
+            <p>I know I messed up, and I'm so sorry. I would never want to hurt you on purpose, and seeing you sad breaks my heart more than anything.</p>
+            <p>Thank you for being patient with me, for listening when I fumble my words, and for giving me another chance to be the person you deserve. I promise to love you better - one beautiful day at a time.</p>
+        </div>
+        
+        <button class="action-btn" onclick="location.reload()">Start Over ↺</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const questionPage = document.getElementById('question-page');
+        const successPage = document.getElementById('success-page');
+
+        // Fungsi untuk membuat tombol "No" lari saat disentuh kursor
+        noBtn.addEventListener('mouseover', () => {
+            // Mengubah posisi tombol menjadi absolute agar bisa bergerak bebas
+            noBtn.style.position = 'absolute';
+            
+            // Menghitung batas layar agar tombol tidak keluar dari layar
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            // Menghasilkan posisi X dan Y secara acak
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            // Mengaplikasikan posisi baru ke tombol
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        // Fungsi saat tombol "Yes" diklik
+        yesBtn.addEventListener('click', () => {
+            // Menyembunyikan halaman pertanyaan
+            questionPage.classList.add('hidden');
+            // Menampilkan halaman sukses
+            successPage.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
